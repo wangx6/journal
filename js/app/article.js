@@ -16,8 +16,9 @@
 		this.wrap = $('<div>',{ class:'news-ctnr' });
 		this.imgCtnr = $('<div>',{ class:'img-ctnr' });
 		this.images = [];
-		this.heading = '';
-		this.excerpt = '';
+		this.heading = null;
+		this.timeStamp = null;
+		this.excerpt = null;
 
 		this.alive( news );
 	};
@@ -29,15 +30,17 @@
 
 		if(!news || !news.heading || !news.excerpt || !news.images) return this;
 		this.heading = $('<h3>').html(news.heading);
+		this.timeStamp = $('<span>').html(news.time);
 		this.excerpt = $('<p>').html(news.excerpt);
 		this.images = news.images;
 		this.organizeImages( this.images );
 		this.wrap
 			.attr('data',this.id)
 			.append(this.heading)
+			.append(this.timeStamp)
 			.append(this.excerpt)
 			.append(this.imgCtnr)
-			.appendTo(this.body);
+			.prependTo(this.body);
 			
 		return this;
 	};

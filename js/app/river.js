@@ -4,13 +4,14 @@
 	var 
 
 	_config = {
-		_TO_MANY_REQUEST_TIME 	: 4000,
-		_REQUEST_TIME 			: 60000
+		_TO_MANY_REQUESTS_TIME 	: 4000,
+		_REQUEST_TIME 			: 4000
 	},
-	_input,
+	_input = null,
 	_riverFlow = null,
 	_body = $('body'),
 	_cache = [],
+	_ids = [],
 
 
 	/*	request data from the server
@@ -47,40 +48,28 @@
 	_buildRiver = function( forWhat, data ){
 		'use strict';
 
-		var i, j, temp, c = 0;
+		var i, j, temp, c = 0, news, article;
 
 		for(i in data){
 			if (c === 10) break; 
 			for(j in data[i]){
 				if(c === 10) break;
 				temp = data[i][j];
-				_cache.push( {
-					obj:{
+				_ids.push(temp.id);
+				news = {
 						id 		: temp.id,
+						time 	: temp.date,
 						heading : temp.title,
 						excerpt : temp.excerpt,
-						images  : temp.images
-					}, 
-					new: 1 
-				} );
+						images  : temp.images 
+				};
+				article = new Article( news, _body );
+				_cache.push(article);
 				c++;
 			}
 		}
 		console.log(_cache);
-		_createHTML();
 		
-	},
-
-	_createHTML = function(){
-		'use strict';
-
-		var i,article;
-
-		for(i in _cache){
-			if (_cache[i].new === 0) continue;
-			article = new Article( _cache[i].obj, _body );
-			_cache[i].new = 0;
-		}
 	},
 
 	_getToken = function(){ return 'token for anti-xxs'; };
