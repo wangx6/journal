@@ -1,0 +1,19 @@
+body,div,p, ul, li, table, tr, td, h3,h1,h2{ margin:0; padding:0, border:0; }
+body{
+	
+}
+.news-ctnr{
+	font-family: 'Roboto','Droid';
+	width: 500px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	padding: 15px;
+	margin-left: 40px;
+}
+.news-ctnr h3{ padding-bottom: 15px; }
+.news-ctnr p{
+	margin-bottom: 15px;
+}
+.news-ctrn .img-ctnr{ width: 500px;  }
+.news-ctnr .img-ctnr img{ width: 500px; }
