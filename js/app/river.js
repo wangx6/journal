@@ -19,6 +19,7 @@
 	_requestData = function(){
 		'use strict';
 
+		// possible security issue
 		// input  = {};
 		// input._token = _getToken();
 
@@ -46,59 +47,39 @@
 	_buildRiver = function( forWhat, data ){
 		'use strict';
 
-		var i, j, z, article, imgCtnr, img, temp, news = [], c = 0;
-
-		if (_cache.length === 0){
-			for(i in data){
-				if (c === 10) break; 
-				for(j in data[i]){
-					if(c === 10) break;
-					
-					temp = data[i][j];
-					news.id = temp.id;
-					news.heading = temp.title;
-					news.excerpt = temp.excerpt;
-					news.images = temp.images;
-
-					article = new Article( news, _body );
-					_cache.push( {obj:article, new:1 } );
-					c++;
-				}
-			}
-			console.log(_cache);
-		}else {
-			_flow( data );
-		}
-	},
-
-
-	/*	new flow, dynamically refresh the incoming news
-	*	@param {array} data
-	*/
-	_flow = function( data ){
-		'use strict';
-
-		var 
-
-		numOfFreshNews = 0,c = 0 ,i , j;
+		var i, j, temp, c = 0;
 
 		for(i in data){
 			if (c === 10) break; 
 			for(j in data[i]){
 				if(c === 10) break;
-				
 				temp = data[i][j];
-				if(temp.id == _cache[0].id) return;
-					
-				news.id = temp.id;
-				news.heading = temp.title;
-				news.excerpt = temp.excerpt;
-				news.images = temp.images;
-
-				article = new Article( news, _body );
-				_cache.unshift( { obj:article , new: 1 } );
+				_cache.push( {
+					obj:{
+						id 		: temp.id,
+						heading : temp.title,
+						excerpt : temp.excerpt,
+						images  : temp.images
+					}, 
+					new: 1 
+				} );
 				c++;
 			}
+		}
+		console.log(_cache);
+		_createHTML();
+		
+	},
+
+	_createHTML = function(){
+		'use strict';
+
+		var i,article;
+
+		for(i in _cache){
+			if (_cache[i].new === 0) continue;
+			article = new Article( _cache[i].obj, _body );
+			_cache[i].new = 0;
 		}
 	},
 
