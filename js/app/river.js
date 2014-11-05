@@ -28,7 +28,6 @@
 			url: _pathMap[path] || _pathMap['default'],
 			complete: function(xhr, textStatus) {
 		        if(xhr.status == 429) _riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
-		        console.log('ok');
 		    }
 		})
 		.done(function(data){
