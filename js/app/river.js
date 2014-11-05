@@ -85,8 +85,7 @@
 		var 
 
 		pathname = location.pathname.split('/'),
-		lastParam = pathname[pathname.length - 2];
-		return lastParam;
+		return pathname[pathname.length - 2];
 	};
 
 	_requestData();
