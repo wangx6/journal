@@ -23,8 +23,9 @@
 	_requestData = function(){
 		'use strict';		
 
+		var path = _getPath();
 		$.ajax({
-			url: _pathMap[_getPath()] || _pathMap['default'],
+			url: _pathMap[path] || _pathMap['default'],
 			statusCode: {
 				429: function(){
 					_riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
@@ -33,7 +34,7 @@
 		})
 		.done(function(data){
 			if (data.status == 429) _riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
-			_buildRiver( 'google' , data.response );
+			_buildRiver( path , data.response );
 			_riverFlow = setTimeout( function() {  _requestData(); }, _config._REQUEST_TIME );
 		});
 	},
