@@ -49,23 +49,14 @@
 		'use strict';
 
 		var 
-		i, j, z , news, 
-		article, arr = [], idFound = false;
+		i, j, z ,c, news, 
+		article, idFound = false;
 
-		arr = _cache;
 
 		for(i in data){
-			if(arr.length === 10) break;
-
-			idFound = false;
-			for(z in arr){
-				if(data[i].id == arr[z].id){
-					idFound = true;	
-					break;
-				} 
-			}
-
-			if(!idFound){
+			console.log(data[i].id)
+			if(c === 10) break;
+			if(!_cache[data[i].id]){
 				news = {
 					id 		: data[i].id,
 					time 	: data[i].date,
@@ -74,8 +65,9 @@
 					images	: data[i].images 
 				};
 				article = new Article( news, _body );
-				_cache.push(article);
+				_cache[data[i].id] = article;
 			}
+			c++;
 		}
 	},
 
@@ -84,7 +76,7 @@
 
 		var 
 
-		pathname = location.pathname.split('/'),
+		pathname = location.pathname.split('/');
 		return pathname[pathname.length - 2];
 	};
 
