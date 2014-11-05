@@ -56,7 +56,7 @@
 
 		for(i in data){
 			if(arr.length === 10) break;
-			
+
 			idFound = false;
 			for(z in arr){
 				if(data[i].id == arr[z].id){
@@ -67,11 +67,11 @@
 
 			if(!idFound){
 				news = {
-					id 	    : data[i].id,
+					id 		: data[i].id,
 					time 	: data[i].date,
-					heading : data[i].title,
-					excerpt : data[i].excerpt,
-					images  : data[i].images 
+					heading	: data[i].title,
+					excerpt	: data[i].excerpt,
+					images	: data[i].images 
 				};
 				article = new Article( news, _body );
 				_cache.push(article);
