@@ -26,14 +26,12 @@
 		var path = _getPath();
 		$.ajax({
 			url: _pathMap[path] || _pathMap['default'],
-			statusCode: {
-				429: function(){
-					_riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
-				}
-			}
+			complete: function(xhr, textStatus) {
+		        if(xhr.status == 429) _riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
+		        console.log('ok');
+		    }
 		})
 		.done(function(data){
-			if (data.status == 429) _riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
 			_buildRiver( path , data.response.articles );
 			_riverFlow = _repeatAction( _config._REQUEST_TIME );
 		});
@@ -66,6 +64,7 @@
 			}
 			c++;
 		}
+		console.log(Object.keys(_cache).length);
 	},
 
 	_repeatAction = function(time){
