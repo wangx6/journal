@@ -66,7 +66,6 @@
 			}
 			c++;
 		}
-		console.log(Object.keys(_cache).length);
 	},
 
 	_repeatAction = function(time){
