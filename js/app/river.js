@@ -62,6 +62,7 @@
 
 				for(z in arr){
 					if(temp.id == arr[z].id) idFound = true;
+					break;
 				}
 
 				if(!idFound){
