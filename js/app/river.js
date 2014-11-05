@@ -48,21 +48,18 @@
 	_buildRiver = function( forWhat, data ){
 		'use strict';
 
-		console.log(data)
-
 		var 
-		i, j,z , temp, news, 
+		i, j, z , news, 
 		article, arr = [], idFound = false;
 
 		arr = _cache;
 
 		for(i in data){
 			if(arr.length === 10) break;
-			temp = data[i];
+			
 			idFound = false;
-
 			for(z in arr){
-				if(temp.id == arr[z].id){
+				if(data[i].id == arr[z].id){
 					idFound = true;	
 					break;
 				} 
@@ -70,11 +67,11 @@
 
 			if(!idFound){
 				news = {
-					id 	    : temp.id,
-					time 	: temp.date,
-					heading : temp.title,
-					excerpt : temp.excerpt,
-					images  : temp.images 
+					id 	    : data[i].id,
+					time 	: data[i].date,
+					heading : data[i].title,
+					excerpt : data[i].excerpt,
+					images  : data[i].images 
 				};
 				article = new Article( news, _body );
 				_cache.push(article);
