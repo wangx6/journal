@@ -34,7 +34,7 @@
 		})
 		.done(function(data){
 			if (data.status == 429) _riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
-			_buildRiver( path , data.response );
+			_buildRiver( path , data.response.articles );
 			_riverFlow = setTimeout( function() {  _requestData(); }, _config._REQUEST_TIME );
 		});
 	},
@@ -48,40 +48,38 @@
 	_buildRiver = function( forWhat, data ){
 		'use strict';
 
+		console.log(data)
+
 		var 
-		i, j,z , temp, c = 0, news, 
+		i, j,z , temp, news, 
 		article, arr = [], idFound = false;
 
 		arr = _cache;
 
 		for(i in data){
-			if (c === 10) break; 
-			for(j in data[i]){
-				if(c === 10) break;
-				temp = data[i][j];
-				idFound = false;
+			if(arr.length === 10) break;
+			temp = data[i];
+			idFound = false;
 
-				for(z in arr){
-					if(temp.id == arr[z].id){
-						idFound = true;	
-						break;
-					} 
-				}
-
-				if(!idFound){
-					news = {
-						id 	    : temp.id,
-						time 	: temp.date,
-						heading : temp.title,
-						excerpt : temp.excerpt,
-						images  : temp.images 
-					};
-					article = new Article( news, _body );
-					_cache.push(article);
-				}
-				c++;
+			for(z in arr){
+				if(temp.id == arr[z].id){
+					idFound = true;	
+					break;
+				} 
 			}
-		}	
+
+			if(!idFound){
+				news = {
+					id 	    : temp.id,
+					time 	: temp.date,
+					heading : temp.title,
+					excerpt : temp.excerpt,
+					images  : temp.images 
+				};
+				article = new Article( news, _body );
+				_cache.push(article);
+			}
+		}
 	},
 
 	_getPath = function(){
