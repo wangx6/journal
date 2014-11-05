@@ -58,7 +58,7 @@
 
 		if(!images) return this;
 		for( i in images ){
-			if(images[i].width >= 500){
+			if(images[i].width >= 400){
 				$('<img>')
 					.attr('src',images[i].image).appendTo(this.imgCtnr)
 					.attr('image',images[i].image);

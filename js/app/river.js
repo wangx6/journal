@@ -7,24 +7,24 @@
 		_TO_MANY_REQUESTS_TIME 	: 4000,
 		_REQUEST_TIME 			: 4000
 	},
-	_input = null,
 	_riverFlow = null,
 	_body = $('body'),
 	_cache = [],
+	_path = '',
+	_pathMap = {
+		google: '../data/data.php',
+		'default':'data/data.php'
+	},
 
 
 	/*	request data from the server
 	*	@param N/A
 	*/
 	_requestData = function(){
-		'use strict';
-
-		// possible security issue
-		// input  = {};
-		// input._token = _getToken();
+		'use strict';		
 
 		$.ajax({
-			url: 'data/data.php',
+			url: _pathMap[_getPath()] || _pathMap['default'],
 			statusCode: {
 				429: function(){
 					_riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
@@ -78,15 +78,20 @@
 					article = new Article( news, _body );
 					_cache.push(article);
 				}
-
-				
 				c++;
 			}
-		}
-		console.log(_cache);	
+		}	
 	},
 
-	_getToken = function(){ return 'token for anti-xxs'; };
+	_getPath = function(){
+		'use strict';
+
+		var 
+
+		pathname = location.pathname.split('/'),
+		lastParam = pathname[pathname.length - 2];
+		return lastParam;
+	};
 
 	_requestData();
 
