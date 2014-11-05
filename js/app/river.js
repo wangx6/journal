@@ -5,7 +5,7 @@
 
 	_config = {
 		_TO_MANY_REQUESTS_TIME 	: 4000,
-		_REQUEST_TIME 			: 4000
+		_REQUEST_TIME 			: 10000
 	},
 	_riverFlow = null,
 	_body = $('body'),
