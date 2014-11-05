@@ -28,14 +28,14 @@
 			url: _pathMap[path] || _pathMap['default'],
 			statusCode: {
 				429: function(){
-					_riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
+					_riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
 				}
 			}
 		})
 		.done(function(data){
-			if (data.status == 429) _riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
+			if (data.status == 429) _riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
 			_buildRiver( path , data.response.articles );
-			_riverFlow = setTimeout( function() {  _requestData(); }, _config._REQUEST_TIME );
+			_riverFlow = _repeatAction( _config._REQUEST_TIME );
 		});
 	},
 
@@ -49,12 +49,9 @@
 		'use strict';
 
 		var 
-		i, j, z ,c, news, 
-		article, idFound = false;
-
+		i, c, news, article;
 
 		for(i in data){
-			console.log(data[i].id)
 			if(c === 10) break;
 			if(!_cache[data[i].id]){
 				news = {
@@ -69,6 +66,10 @@
 			}
 			c++;
 		}
+	},
+
+	_repeatAction = function(time){
+		return setTimeout( function(){ _requestData(); }, time );
 	},
 
 	_getPath = function(){
