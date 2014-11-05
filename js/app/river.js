@@ -69,7 +69,7 @@
 
 				if(!idFound){
 					news = {
-						id 		: temp.id,
+						id 	    : temp.id,
 						time 	: temp.date,
 						heading : temp.title,
 						excerpt : temp.excerpt,
