@@ -40,7 +40,7 @@
 			.append(this.timeStamp)
 			.append(this.excerpt)
 			.append(this.imgCtnr)
-			.prependTo(this.body);
+			.prependTo(this.body).hide().fadeIn();
 			
 		return this;
 	};

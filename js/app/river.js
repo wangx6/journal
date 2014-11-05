@@ -11,7 +11,6 @@
 	_riverFlow = null,
 	_body = $('body'),
 	_cache = [],
-	_ids = [],
 
 
 	/*	request data from the server
@@ -35,7 +34,7 @@
 		.done(function(data){
 			if (data.status == 429) _riverFlow = setTimeout( function(){ requestData(); }, _config._TO_MANY_REQUEST_TIME );
 			_buildRiver( 'google' , data.response );
-			//_riverFlow = setTimeout( function() {  _requestData(); }, _config._REQUEST_TIME );
+			_riverFlow = setTimeout( function() {  _requestData(); }, _config._REQUEST_TIME );
 		});
 	},
 
@@ -48,28 +47,40 @@
 	_buildRiver = function( forWhat, data ){
 		'use strict';
 
-		var i, j, temp, c = 0, news, article;
+		var 
+		i, j,z , temp, c = 0, news, 
+		article, arr = [], idFound = false;
+
+		arr = _cache;
 
 		for(i in data){
 			if (c === 10) break; 
 			for(j in data[i]){
 				if(c === 10) break;
 				temp = data[i][j];
-				_ids.push(temp.id);
-				news = {
+				idFound = false;
+
+				for(z in arr){
+					if(temp.id == arr[z].id) idFound = true;
+				}
+
+				if(!idFound){
+					news = {
 						id 		: temp.id,
 						time 	: temp.date,
 						heading : temp.title,
 						excerpt : temp.excerpt,
 						images  : temp.images 
-				};
-				article = new Article( news, _body );
-				_cache.push(article);
+					};
+					article = new Article( news, _body );
+					_cache.push(article);
+				}
+
+				
 				c++;
 			}
 		}
-		console.log(_cache);
-		
+		console.log(_cache);	
 	},
 
 	_getToken = function(){ return 'token for anti-xxs'; };
