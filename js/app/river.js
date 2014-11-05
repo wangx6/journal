@@ -5,7 +5,7 @@
 
 	_config = {
 		_TO_MANY_REQUESTS_TIME 	: 4000,
-		_REQUEST_TIME 			: 10000
+		_REQUEST_TIME 			: 7000
 	},
 	_riverFlow = null,
 	_body = $('body'),
@@ -49,7 +49,7 @@
 		'use strict';
 
 		var 
-		i, c, news, article;
+		i, c = 0, news, article;
 
 		for(i in data){
 			if(c === 10) break;
@@ -66,6 +66,7 @@
 			}
 			c++;
 		}
+		console.log(Object.keys(_cache).length);
 	},
 
 	_repeatAction = function(time){
