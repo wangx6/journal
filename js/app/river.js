@@ -1,6 +1,7 @@
 (function($){
 	'use strict';
 
+
 	var 
 
 	_config = {
@@ -31,6 +32,7 @@
 		    }
 		})
 		.done(function(data){
+			data = _filterData(path, data);
 			_buildRiver( path , data.response.articles );
 			_riverFlow = _repeatAction( _config._REQUEST_TIME );
 		});
@@ -63,11 +65,26 @@
 			}
 			c++;
 		}
-		console.log(Object.keys(_cache).length);
+		//console.log(Object.keys(_cache).length);
 	},
 
 	_repeatAction = function(time){
 		return setTimeout( function(){ _requestData(); }, time );
+	},
+
+	_filterData = function(option, data){
+		var filter = {
+			google: (function(){
+				/**
+				*	TODO: add filter mechanism to identify the type data required 
+				*/
+				return data;
+			})(),
+			default: (function(){
+				return data;
+			})()
+		};
+		return filter[option] || filter['default'];
 	},
 
 	_getPath = function(){
