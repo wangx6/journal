@@ -1,4 +1,4 @@
-(function(window,$){
+!function(window,$){
 	'use strict';
 	
 	var 
@@ -67,4 +67,4 @@
 
 	window.Article = Article;
 
-})(window,jQuery);
+}(window,jQuery);

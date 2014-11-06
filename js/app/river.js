@@ -1,4 +1,4 @@
-(function($){
+!function($){
 	'use strict';
 
 
@@ -100,6 +100,6 @@
 
 	_requestData();
 
-})(jQuery);
+}(jQuery);
 
 
