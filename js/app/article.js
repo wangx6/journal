@@ -9,7 +9,6 @@
 	*	return this (chain)
 	*/
 	Article = function( news, body ){
-		'use strict';
 
 		this.body = body;
 		this.id = news.id;
@@ -26,7 +25,6 @@
 
 	// HANDLER
 	Article.prototype.alive = function( news ) {
-		'use strict';
 
 		if(!news || !news.heading || !news.excerpt || !news.images) return this;
 		this.heading = $('<h3>').html(news.heading);
@@ -50,7 +48,6 @@
 	*  	@param {array} images
 	*/
 	Article.prototype.organizeImages = function( images ){
-		'use strict';
 
 		var 
 

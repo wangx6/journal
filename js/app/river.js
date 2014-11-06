@@ -21,8 +21,7 @@
 	/*	request data from the server
 	*	@param N/A
 	*/
-	_requestData = function(){
-		'use strict';		
+	_requestData = function(){		
 
 		var path = _getPath();
 		$.ajax({
@@ -45,7 +44,6 @@
 	*	@param 	{array} data
 	*/
 	_buildRiver = function( forWhat, data ){
-		'use strict';
 
 		var 
 		i, c = 0, news, article;
@@ -73,6 +71,7 @@
 	},
 
 	_filterData = function(option, data){
+		
 		var filter = {
 			google: (function(){
 				/**
@@ -88,10 +87,8 @@
 	},
 
 	_getPath = function(){
-		'use strict';
 
 		var 
-
 		pathname = location.pathname.split('/');
 		return pathname[pathname.length - 2];
 	};
