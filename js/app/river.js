@@ -28,12 +28,17 @@
 			url: _pathMap[path] || _pathMap['default'],
 			complete: function(xhr, textStatus) {
 		        if(xhr.status == 429) _riverFlow = _repeatAction( _config._TO_MANY_REQUEST_TIME );
+		        console.log(xhr.status, textStatus);
 		    }
 		})
 		.done(function(data){
 			data = _filterData(path, data);
 			_buildRiver( path , data.response.articles );
 			_riverFlow = _repeatAction( _config._REQUEST_TIME );
+		})
+		.fail(function(){
+			clearTimeout(_riverFlow);
+			_requestData();
 		});
 	},
 
