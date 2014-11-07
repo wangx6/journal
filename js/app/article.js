@@ -34,7 +34,15 @@
 		this.heading = $('<h3>').html(news.heading);
 		this.timeStamp = $('<span>').html(news.time);
 		this.excerpt = $('<p>').html(news.excerpt);
-		this.readMore = $('<span>').addClass('read-more-btn').html('read more').on('click',function(){ self.content.toggle(); });
+		this.readMore = $('<span>')
+			.addClass('read-more-btn')
+			.html('read more')
+			.on('click',function(){ 
+				self.content.toggle(); 
+				$(this).text($(this).text() == 'read more' ? 'read less' : 'read more');
+			})
+
+
 		this.content = $('<p>').html(news.content).hide();
 		this.images = news.images;
 		this.organizeImages( this.images );

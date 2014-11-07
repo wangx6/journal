@@ -69,9 +69,7 @@
 				_cache[v.id] = article;
 			}
 			c++;
-		}
-		
-			
+		}	
 		
 		//console.log(Object.keys(_cache).length);
 	},
