@@ -51,23 +51,28 @@
 	_buildRiver = function( forWhat, data ){
 
 		var 
-		i, c = 0, news, article;
+		i, v, c = 0, news, article;
 
 		for(i in data){
+			v = data[i];
 			if(c === 10) break;
-			if(!_cache[data[i].id]){
+			if(!_cache[v.id]){
 				news = {
-					id 		: data[i].id,
-					time 	: data[i].date,
-					heading	: data[i].title,
-					excerpt	: data[i].excerpt,
-					images	: data[i].images 
+					id 		: v.id,
+					time 	: v.date,
+					heading	: v.title,
+					excerpt	: v.excerpt,
+					content : v.content,
+					images	: v.images 
 				};
 				article = new Article( news, _body );
-				_cache[data[i].id] = article;
+				_cache[v.id] = article;
 			}
 			c++;
 		}
+		
+			
+		
 		//console.log(Object.keys(_cache).length);
 	},
 
