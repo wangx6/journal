@@ -41,8 +41,6 @@
 				self.content.toggle(); 
 				$(this).text($(this).text() == 'read more' ? 'read less' : 'read more');
 			})
-
-
 		this.content = $('<p>').html(news.content).hide();
 		this.images = news.images;
 		this.organizeImages( this.images );
